@@ -20,10 +20,10 @@ const TYPE_ICONS: Record<string, string> = {
 };
 
 const TYPE_SUBTITLES: Record<string, string> = {
-  簡潔型: "Essence in simplicity",
-  忠実型: "True to your sound",
-  バランス型: "Harmony of form",
-  詩的型: "Art of expression",
+  簡潔型: "簡潔 · Essence in simplicity",
+  忠実型: "忠実 · True to your sound",
+  バランス型: "調和 · Harmony of form",
+  詩的型: "詩的 · Art of expression",
 };
 
 export default function Home() {
@@ -52,7 +52,7 @@ export default function Home() {
       const data = await res.json();
 
       if (!res.ok) {
-        throw new Error(data.error || "エラーが発生しました");
+        throw new Error(data.error || "An error occurred");
       }
 
       setCandidates(data.candidates);
@@ -61,7 +61,7 @@ export default function Home() {
         resultsRef.current?.scrollIntoView({ behavior: "smooth" });
       }, 100);
     } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : "エラーが発生しました");
+      setError(err instanceof Error ? err.message : "An error occurred");
     } finally {
       setLoading(false);
     }
@@ -190,7 +190,7 @@ export default function Home() {
     // Meaning section
     ctx.fillStyle = "#d4a843";
     ctx.font = '22px "Noto Serif JP", serif';
-    ctx.fillText("— 意 味 —", w / 2, 910);
+    ctx.fillText("— Meaning —", w / 2, 910);
 
     ctx.fillStyle = "#c0c0c0";
     ctx.font = '24px "Noto Serif JP", serif';
@@ -204,7 +204,7 @@ export default function Home() {
 
     ctx.fillStyle = "#d4a843";
     ctx.font = '22px "Noto Serif JP", serif';
-    ctx.fillText("— 想 い —", w / 2, conceptY);
+    ctx.fillText("— Concept —", w / 2, conceptY);
 
     ctx.fillStyle = "#a0a0a0";
     ctx.font = '22px "Noto Serif JP", serif';
@@ -246,10 +246,7 @@ export default function Home() {
           KANJI NAME
         </p>
         <p className="text-[var(--color-text-muted)] text-sm mt-4 tracking-wide">
-          あなたの名前に、漢字の美を
-        </p>
-        <p className="text-[var(--color-text-muted)] text-xs mt-1">
-          Transform your name into Japanese kanji
+          Transform your name into beautiful Japanese kanji
         </p>
       </header>
 
@@ -289,7 +286,7 @@ export default function Home() {
               <span className="loading-dot" />
             </span>
           ) : (
-            "漢字を生成する ― Generate"
+            "Generate Kanji"
           )}
         </button>
       </section>
@@ -305,7 +302,7 @@ export default function Home() {
       {candidates.length > 0 && (
         <section ref={resultsRef} className="mb-16">
           <h2 className="text-center text-[var(--color-gold)] tracking-[0.5em] text-sm mb-2">
-            候補
+            CANDIDATES
           </h2>
           <p className="text-center text-[var(--color-text-muted)] text-xs mb-10 tracking-wide">
             Select your favorite to create a name card
@@ -332,10 +329,10 @@ export default function Home() {
                     </span>
                     <div>
                       <span className="text-[var(--color-gold)] text-sm tracking-wider">
-                        {c.type}
+                        {c.label}
                       </span>
                       <p className="text-[var(--color-text-muted)] text-xs">
-                        {TYPE_SUBTITLES[c.type] || c.label}
+                        {TYPE_SUBTITLES[c.type] || c.type}
                       </p>
                     </div>
                   </div>
@@ -368,7 +365,7 @@ export default function Home() {
                 <div className="space-y-3 text-sm border-t border-[var(--color-border)] pt-4">
                   <div>
                     <span className="text-[var(--color-gold-dark)] text-xs tracking-wider">
-                      意味
+                      MEANING
                     </span>
                     <p className="text-[#c0c0c0] mt-0.5 leading-relaxed">
                       {c.meaning}
@@ -376,7 +373,7 @@ export default function Home() {
                   </div>
                   <div>
                     <span className="text-[var(--color-gold-dark)] text-xs tracking-wider">
-                      想い
+                      CONCEPT
                     </span>
                     <p className="text-[#a0a0a0] mt-0.5 leading-relaxed">
                       {c.concept}
@@ -384,7 +381,7 @@ export default function Home() {
                   </div>
                   <div>
                     <span className="text-[var(--color-gold-dark)] text-xs tracking-wider">
-                      解説
+                      DESCRIPTION
                     </span>
                     <p className="text-[#808080] mt-0.5 leading-relaxed text-xs">
                       {c.description}
